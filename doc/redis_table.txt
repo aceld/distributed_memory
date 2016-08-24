@@ -1,0 +1,36 @@
+
+
+[ZSET] zset_pv
+file_id1 ----> pv
+file_id2 ----> pv
+file_id3 ----> pv
+file_id4 ----> pv
+file_id5 ----> pv
+file_id6 ----> pv
+
+[LIST]  list
+file_id1 
+file_id2 
+file_id3 
+file_id4 
+file_id5 
+file_id6 
+
+[HASH]
+file_id1--->url         ->file_url
+            filename    ->filename.png
+            createtime  ->2016-10-21 14:14:14
+            user        ->ace
+            type        ->png
+file_id2--->url         ->file_url
+            filename    ->filename.png
+            createtime  ->2016-10-21 14:14:14
+            user        ->ace
+            type        ->png
+
+file_id3--->url         ->file_url
+            filename    ->filename.png
+            createtime  ->2016-10-21 14:14:14
+            user        ->ace
+            type        ->png
+

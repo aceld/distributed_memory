@@ -1,0 +1,146 @@
+===20160815-161359,rop_connectdb_nopwd[369]=== [+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+
+===20160815-161359,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161359,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161359,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161359,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161359,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161359,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161359,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161359,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161359,rop_disconnect[525]=== [+][GMS_REDIS]Disconnect SUCCESS!
+
+===20160815-161408,rop_connectdb_nopwd[369]=== [+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+
+===20160815-161408,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161408,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161408,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161408,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161408,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161408,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161408,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161408,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161408,rop_disconnect[525]=== [+][GMS_REDIS]Disconnect SUCCESS!
+
+===20160815-161505,rop_connectdb_nopwd[369]=== [+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+
+===20160815-161505,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161505,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161505,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161505,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161505,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161505,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161505,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161505,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-161505,rop_disconnect[525]=== [+][GMS_REDIS]Disconnect SUCCESS!
+
+===20160815-171200,rop_connectdb_nopwd[369]=== [+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+
+===20160815-171200,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171200,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171200,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171200,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171200,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171200,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171200,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171200,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171200,rop_disconnect[525]=== [+][GMS_REDIS]Disconnect SUCCESS!
+
+===20160815-171204,rop_connectdb_nopwd[369]=== [+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+
+===20160815-171204,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171204,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171204,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171204,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171204,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171204,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171204,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171204,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171204,rop_disconnect[525]=== [+][GMS_REDIS]Disconnect SUCCESS!
+
+===20160815-171213,rop_connectdb_nopwd[369]=== [+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+
+===20160815-171213,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171213,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171213,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171213,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171213,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171213,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171213,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171213,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171213,rop_disconnect[525]=== [+][GMS_REDIS]Disconnect SUCCESS!
+
+===20160815-171222,rop_connectdb_nopwd[369]=== [+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+
+===20160815-171222,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-171222,rop_disconnect[525]=== [+][GMS_REDIS]Disconnect SUCCESS!
+
+===20160815-173745,rop_connectdb_nopwd[369]=== [+][GMS_REDIS]Connect 127.0.0.1:6379 SUCCESS!
+
+===20160815-173745,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-173745,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-173745,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-173745,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-173745,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-173745,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-173745,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-173745,rop_test_reply_type[329]=== [+][GMS_REDIS]=REDIS_REPLY_string=[string] use reply->str to get data, reply->len get data len
+
+===20160815-173745,rop_disconnect[525]=== [+][GMS_REDIS]Disconnect SUCCESS!
+

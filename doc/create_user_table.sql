@@ -1,0 +1,1 @@
+create table user(u_id bigint not null primary key AUTO_INCREMENT, u_name VARCHAR(40) not null, nicheng VARCHAR(40) not null, password VARCHAR(40) not null, phone VARCHAR(15) not null, createtime timestamp, email VARCHAR(40), constraint uq_nicheng unique(nicheng), constraint uq_u_name unique(u_name));
