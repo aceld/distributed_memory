@@ -11,6 +11,8 @@
 #include "redis_keys.h"
 #include "redis_op.h"
 
+#define UPLOAD_LOG_MODULE "cgi"
+#define UPLOAD_LOG_PROC   "upload"
 
 int main ()
 {
@@ -157,6 +159,8 @@ int main ()
             write(fd, begin, (p-begin));
             close(fd);
 
+            LOG(UPLOAD_LOG_MODULE, UPLOAD_LOG_PROC, "upload [%s] succ!", filename);
+
             //===============> 将该文件存入fastDFS中,并得到文件的file_id <============
             pid_t pid;
             int pfd[2];
@@ -196,9 +200,9 @@ int main ()
                 printf("[upload FAILED!]");
                 goto END;
             }
-            //printf("[%s]\n", fdfs_file_path);
             wait(NULL);
             close(pfd[0]);
+            LOG(UPLOAD_LOG_MODULE, UPLOAD_LOG_PROC, "get [%s] succ!\n", fdfs_file_path);
 
 
             //================ > 得到文件所存放storage的host_name <=================
@@ -220,7 +224,7 @@ int main ()
             close(pfd[1]);
             //read from 读管道
             read(pfd[0], fdfs_file_stat_buf, 256);
-            //printf("[%s]\n", fdfs_file_stat_buf);
+            LOG(UPLOAD_LOG_MODULE, UPLOAD_LOG_PROC, "get file_ip [%s] succ\n", fdfs_file_stat_buf);
             wait(NULL);
             close(pfd[0]);
 

@@ -12,6 +12,8 @@
 
 #include "make_log.h"
 
+#define USER_NAME_LEN   (256)
+#define PWD_LEN         (256)
 #define HOST_NAME_LEN   (128)
 #define FILE_NAME_LEN   (256)
 #define PIC_URL_LEN     (256)

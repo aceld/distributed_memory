@@ -15,8 +15,9 @@ obj = $(patsubst %.c, %.o, $(src))
 upload=cgi_bin/upload
 data=cgi_bin/data
 reg=cgi_bin/reg
+login=cgi_bin/login
 
-target=$(upload) $(data) $(reg)
+target=$(upload) $(data) $(reg) $(login)
 
 
 ALL:$(target)
@@ -37,6 +38,10 @@ $(data): data_cgi.o cJSON.o dao_mysql.o util_cgi.o make_log.o redis_op.o
 
 #reg cgi程序
 $(reg): reg_cgi.o cJSON.o dao_mysql.o util_cgi.o make_log.o redis_op.o
+	$(CC) $^ -o $@ $(LIBS)
+
+#login cgi程序
+$(login): login_cgi.o cJSON.o dao_mysql.o util_cgi.o make_log.o redis_op.o
 	$(CC) $^ -o $@ $(LIBS)
 
 

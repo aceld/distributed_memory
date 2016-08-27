@@ -2,6 +2,7 @@
 spawn-fcgi -a 127.0.0.1 -p 8085 -f ./cgi_bin/data
 spawn-fcgi -a 127.0.0.1 -p 8081 -f ./cgi_bin/reg
 spawn-fcgi -a 127.0.0.1 -p 8082 -f ./cgi_bin/upload
+spawn-fcgi -a 127.0.0.1 -p 8084 -f ./cgi_bin/login
 
 
 #启动redis服务器

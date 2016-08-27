@@ -13,7 +13,7 @@
 #include "redis_op.h"
 #include "make_log.h"
 
-#define DATA_LOG_MODULE          "deal_request_data"
+#define DATA_LOG_MODULE          "cgi"
 #define DATA_LOG_PROC            "data"
 
 
