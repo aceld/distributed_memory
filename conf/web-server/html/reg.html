@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>新用户注册</title>
+    <link rel="stylesheet" href="static/css/login.css">
+    <script language="JavaScript" src="static/js/login.js"></script>
+    <script type="text/javascript" src="static/js/jquery-latest.js"></script>
+    <script src="static/js/zepto.min.js" type="text/javascript"></script>
+
+</head>
+<body class="bg">
+<div class="top_menu">
+    <div class="return_back">
+        <img src="static/icon_back_red.png" onclick="javascript:history.go(-1);"/>
+    </div>
+    <div>
+        新用户注册
+    </div>
+</div>
+
+<form >
+    <div class="login_info_div">
+        <div class="menu" style="margin-top: 20px">
+            <img  src="static/user_line.png" />
+            <div class="text_box_1">
+                <input id="username" type="text" onblur="showDefaultText('用户名',this)" onclick="hideDefaultText('用户名',this)" value="用户名"/>
+            </div>
+            <div class="text_box_2">
+                <input id="flower_name" type="text" onblur="showDefaultText('花名',this)" onclick="hideDefaultText('花名',this)" value="花名"/>
+            </div>
+        </div>
+
+        <div class="menu">
+            <img src="static/pwd.png" />
+            <div class="text_box_1">
+                <input id="passwd" type="text" onblur="showDefaultPwd('密码',this)" onclick="hideDefaultPwd('密码',this)" value="密码"/>
+            </div>
+            <div class="text_box_2">
+                <input id="passwd_2" type="text" onblur="showDefaultPwd('再次输入',this)" onclick="hideDefaultPwd('再次输入',this)" value="再次输入"/>
+            </div>
+        </div>
+
+        <div class="menu">
+            <img src="static/phone_number.png" />
+            <div class="text_box">
+                <input id="phone_num" type="text" onblur="showDefaultText('手机号',this)" onclick="hideDefaultText('手机号',this)" value="手机号"/>
+            </div>
+        </div>
+        <div class="menu">
+            <img  src="static/cardcode.png" />
+            <div class="text_box">
+                <input id="email" type="text" onblur="showDefaultText('电子邮箱',this)" onclick="hideDefaultText('电子邮箱',this)" value="电子邮箱"/>
+            </div>
+        </div>
+
+        <!--
+        <div class="menu">
+            <img  src="static/kind.png" />
+            <div class="text_box">
+                <input id="kind" type="text" onblur="showDefaultText('所购买品类',this)" onclick="hideDefaultText('所购买品类',this)" value="所购买品类"/>
+            </div>
+        </div>
+        -->
+    </div>
+</form>
+
+<div class="info_div">
+    <table style="width:100%;" >
+        <tr  height="50px" align="center">
+            <td  width="30%" align="right"><img src="static/hand.png" width="25%"/></td>
+            <td  width="40%" align="center"><input type="image" id="reg_btn" src="static/submit_btn_red.png" width="100%"/></td>
+            <td  width="30%"></td>
+        </tr>
+    </table>
+    <table style="width:100%;height: 30%" >
+        <tr  height="40px" align="center">
+            <td  align="center"><img src="static/qrcode.png" width="30%"></td>
+        </tr>
+        <tr  height="40px" align="center">
+            <td  align="center"><label>扫一扫,优惠享不停</label></td>
+        </tr>
+    </table>
+</div>
+
+<div style="display:none;" value="{% url 'index' %}" id="nextpage">
+</div>
+</body>
+<script>
+    $(function() {
+        $("#reg_btn").click(function(){
+            var username = $("#username").val();
+            var flower_name = $("#flower_name").val();
+            var passwd = $("#passwd").val();
+            var passwd_2 = $("#passwd_2").val();
+            var phone_num = $("#phone_num").val();
+            var email = $("#email").val();
+            //var kind = $("#kind").val();
+            if (username == "用户名" || flower_name == "花名" || passwd == "密码" || passwd_2 == "再次输入" || phone_num == "手机号" || email == "电子邮箱") {
+                alert("请填写必要信息")
+                    return;
+            }
+            if (passwd != passwd_2) {
+                alert("两次输入密码不一致");
+                return;
+            }
+            var url = '/reg';
+            $.get(url, {
+                "type" : 9,
+                "user" : username,
+                "pwd" : passwd,
+                "flower_name" : flower_name,
+                "tel" : phone_num,
+                "email":email,
+            }, function(result) {
+                var jsonResult = JSON.parse(result);
+                if (jsonResult.code != "000") {
+                    alert(result.msg);
+                }
+                else {
+                    //location.href = $("#nextpage").attr("value") + "?username=" + username;
+                    location.href="/?username="+username;
+                }
+            } )
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,269 @@
+.user-body {
+  background-image: url(../img/main_bg.png);
+}
+
+.user_item >p{
+	width: 100%;
+	background: white;
+	box-shadow: 0 1px 0 #BDADAD;
+	margin-bottom: 2%;
+	margin-top: 0px;
+	height: 14%;
+}
+#div_user_img{
+	width: 32%;
+	height: 100%;
+	float: left;
+}
+#div_user_info{
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+#div_enter_icon{
+	width: 18%;
+	height: 50%;
+	position: absolute;
+	float: left;
+	top: 25%;
+	right: 5%;
+}
+
+#user_head{
+	background-image: url(../img/user_bg.png);
+	width: 100%;
+	height: 16%;
+	margin-bottom:20px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.user_i_item{
+	display:inline-block;
+	position:relative;
+	left:5%;
+	bottom:20%;
+	font-size: 100%;
+	color: #8D8686;
+	font-family:Consolas;
+	font-style:normal;
+}
+#user_p_head{
+	margin: 0px;
+	position:relative;
+	border-bottom: 2px solid black;
+}
+#user_p_tip_1{
+	position: relative;
+	top: 30%;
+	height: 20%;
+	font-size: 125%;
+	font-family:Monospace;
+	color: rgba(141, 134, 134, 0.69);
+	margin: 0px;
+}
+#user_p_tip_2{
+	position: relative;
+	top: 35%;
+	height: 15%;
+	font-size: 12px;
+	font-family:Monospace;
+	color: rgba(141, 134, 134, 0.69);
+	margin-top: 5px;
+}
+.hr_img_head{
+	height: 80px;
+	width: 80px;
+	position: absolute;
+	left: 2%;
+	top:0px;
+}
+#font_head{
+	font-family: Arial, sans-serif;
+	color: #868686;
+}
+
+.user_item{
+	position: absolute;
+	height: 40%;
+	top: 19%;
+	left: 0px;
+	/* position: relative; */
+	width: 100%;
+}
+
+.box_img{
+	position: relative;
+	left: 5%;
+	height: 100%;
+}
+#code_img{
+	position: absolute;
+	left: 33%;
+	top: 62%;
+	width: 33%;
+}
+.circle {
+width: 80px;
+height: 80px;
+background: white;
+-moz-border-radius: 50px;
+-webkit-border-radius: 50px;
+border-radius: 80px;
+margin-topop: 5%;
+position: absolute;
+left:10%;
+top:0px;
+}
+@media (device-height:480px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone4/4s */
+.circle {
+width: 58px;
+height: 58px;
+background: white;
+-moz-border-radius: 58px;
+-webkit-border-radius: 58px;
+border-radius: 58px;
+margin-top: 3%;
+position: absolute;
+left:10%;
+top:0px;
+}
+.hr_img_head{
+	height: 58px;
+	width: 58px;
+	position: absolute;
+	left: 2%;
+	top:0px;
+}
+.user_i_item{
+	display:inline-block;
+	position:relative;
+	left:5%;
+	bottom:20%;
+	font-size: 80%;
+	color: #8D8686;
+	font-family:Consolas;
+	font-style:normal;
+}
+#user_p_tip_1{
+	position: relative;
+	top: 30%;
+	height: 20%;
+	font-size: 100%;
+	font-family:Monospace;
+	color: rgba(141, 134, 134, 0.69);
+	margin: 0px;
+}
+#user_p_tip_2{
+	position: relative;
+	top: 35%;
+	height: 15%;
+	font-size: 12px;
+	font-family:Monospace;
+	color: rgba(141, 134, 134, 0.69);
+	margin-top: 5px;
+}
+#div_enter_icon{
+	width: 18%;
+	height: 50%;
+	position: absolute;
+	float: left;
+	top: 10%;
+	right: 5%;
+}
+}
+@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone5 */
+.circle {
+width: 68px;
+height: 68px;
+background: white;
+-moz-border-radius: 68px;
+-webkit-border-radius: 68px;
+border-radius: 68px;
+margin-top: 3%;
+position: absolute;
+left:8%;
+top:0px;
+}
+.hr_img_head{
+	height: 68px;
+	width: 68px;
+	position: absolute;
+	left: 2%;
+	top:0px;
+}
+.user_i_item{
+	display:inline-block;
+	position:relative;
+	left:5%;
+	bottom:30%;
+	font-size: 80%;
+	color: #8D8686;
+	font-family:Consolas;
+	font-style:normal;
+}
+#user_p_tip_1{
+	position: relative;
+	top: 30%;
+	height: 20%;
+	font-size: 100%;
+	font-family:Monospace;
+	color: rgba(141, 134, 134, 0.69);
+	margin: 0px;
+}
+#user_p_tip_2{
+	position: relative;
+	top: 30%;
+	height: 15%;
+	font-size: 12px;
+	font-family:Monospace;
+	color: rgba(141, 134, 134, 0.69);
+	margin-top: 5px;
+}
+#div_enter_icon{
+	width: 18%;
+	height: 50%;
+	position: absolute;
+	float: left;
+	top: 13%;
+	right: 5%;
+}
+}
+@media (device-height:667px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone6 */
+.user_i_item{
+	display:inline-block;
+	position:relative;
+	left:5%;
+	bottom:30%;
+	font-size: 100%;
+	color: #8D8686;
+	font-family:Consolas;
+	font-style:normal;
+}
+#user_p_tip_1{
+	position: relative;
+	top: 30%;
+	left:10px;
+	height: 20%;
+	font-size: 125%;
+	font-family:Monospace;
+	color: rgba(141, 134, 134, 0.69);
+	margin: 0px;
+}
+#user_p_tip_2{
+	position: relative;
+	top: 35%;
+	left:10px;
+	height: 15%;
+	font-size: 12px;
+	font-family:Monospace;
+	color: rgba(141, 134, 134, 0.69);
+	margin-top: 5px;
+}
+}
+@media (device-height:736px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone6+ */
+
+}
+
+

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>登陆界面</title>
+    <link rel="stylesheet" href="static/css/login.css">
+    <script language="JavaScript" src="static/js/login.js"></script>
+    <script type="text/javascript" src="static/js/jquery-latest.js"></script>
+    <script src="static/js/zepto.min.js" type="text/javascript"></script>
+
+</head>
+<body class="bg">
+
+<div class="top_menu">
+    <div class="return_back">
+        <img src="static/icon_back_red.png" onclick="javascript:history.go(-1);"/>
+    </div>
+    <div>登陆</div>
+</div>
+
+<form >
+    <div class="login_info_div">
+        <div class="menu" style="margin-top: 20px" >
+            <img  src="static/user_line.png" />
+            <div class="text_box">
+                <input id="username" type="text" onblur="showDefaultText('用户名',this)" onclick="hideDefaultText('用户名',this)" value="用户名"/>
+            </div>
+        </div>
+
+        <div class="menu">
+            <img src="static/pwd.png" />
+            <div class="text_box">
+                <input id="passwd" type="text" onblur="showDefaultPwd('密码',this)" onclick="hideDefaultPwd('密码',this)" value="密码"/>
+            </div>
+        </div>
+
+        <div class="menu">
+            <img src="static/check-code.png" />
+            <div class="text_box">
+                <input id="check_code" type="text" onblur="showDefaultText('验证码',this)" onclick="hideDefaultText('验证码',this)" value="验证码"/>
+            </div>
+            <img class="check_img" src="static/checkimg.png"/>
+        </div>
+        <div class="check_sec">
+            <table id="checkbox_table" style="width:100%;" >
+                <tr align="center">
+                    <td  align="center"><input type='checkbox' name='option' value="1">记住密码</td>
+                    <td  align="center"><input type='checkbox' name='option' value="2">自动登录<br></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>
+
+
+
+
+<div class="info_div">
+    <table style="width:100%;" >
+        <tr  height="50px" align="center">
+            <td  width="30%" align="right"><img src="static/hand.png" width="25%"/></td>
+            <td  width="40%" align="center"><input type="image" id="reg_btn" src="static/login_btn_red.png" width="100%" /></td>
+            <td  width="30%"></td>
+        </tr>
+    </table>
+    <div class="touch_text"><a href="reg.html">没有账号?</a></div>
+    <table style="width:100%;height: 30%; margin-top: 3%;" >
+        <tr  height="40px" align="center">
+            <td  align="center"><img src="static/qrcode.png" width="30%"></td>
+        </tr>
+        <tr  height="40px" align="center">
+            <td  align="center"><label>扫一扫,优惠享不停</label></td>
+        </tr>
+    </table>
+</div>
+<div style="display:none;" value="{% url 'check' %}" id="nextpage">
+</div>
+</body>
+<script>
+    $(function() {
+        $("#reg_btn").click(function(){
+            var username = $("#username").val();
+            var passwd = $("#passwd").val();
+
+            if (username == "用户名" || passwd == "密码") {
+                alert("用户名、密码不能为空");
+                return;
+            }
+
+            var url = "/login";
+            $.get(url, {
+                "type" : 10,
+                "user" : username,
+                "pwd" : passwd
+            }, function(result) {
+                var jsonResult = JSON.parse(result);
+                if (jsonResult.code == "000") {
+                    //location.href = $("#nextpage").attr("value");
+
+                    //set cookie
+
+                    location.href="/?username="+username;
+                }
+                else if (jsonResult.code == "001") {
+                    alert("用户名或者密码不正确");
+                }
+                else {
+                    alert(result.msg);
+                }
+            } )
+        });
+    });
+</script>
+</html>

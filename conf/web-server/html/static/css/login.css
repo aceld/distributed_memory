@@ -1,0 +1,145 @@
+* {
+    font: normal 15px "微软雅黑";
+    color: #919191;
+}
+/* iphone 4-4s */
+@media (device-height:480px)and(-webkit-min-device-pixel-ratio:2) {
+    * {
+        font: normal 18% "微软雅黑";
+        color: #919191;
+    }
+}
+/* iphone 5 5s */
+@media (device-height:568px)and(-webkit-min-device-pixel-ratio:2) {
+    
+}
+
+.top_menu {
+    width:100%;
+    height: 12%;
+    position: absolute;
+    background-color: white;
+    top: 0px;
+    left:0px;
+    text-align: center;
+    box-shadow: 0px 3px 3px #b3b3b3;
+}
+.top_menu > div {
+    margin-top: 10%;
+}
+
+.return_back {
+    position: absolute;
+    left: 4%;
+}
+
+.login_info_div {
+    position: absolute;
+    width:100%;
+    height: 30%;
+    top:12%;
+    left:0px;
+}
+
+.menu{
+    width:100%;
+    height:25%;
+    background-color: white;
+    margin-top: 2%;
+    box-shadow: 0px 3px 3px #b3b3b3;
+}
+
+.menu > img:first-of-type{
+    margin-left:7%;
+    margin-top: 2%;
+    height: 75%;
+}
+
+.text_box {
+    display: inline-block;
+    position: relative;
+    width: 50%;
+    bottom: 20%;
+}
+.text_box_1 {
+    display: inline-block;
+    position: relative;
+    width: 35%;
+    bottom: 20%;
+}
+.text_box_2 {
+    display: inline-block;
+    position: relative;
+    width: 35%;
+    bottom: 20%;
+    padding-left: 2%;
+    border-left: dashed;
+    border-left-width: 1px;
+}
+
+
+.menu input {
+    width: 100%;
+    height: 10%;
+    border: none;
+}
+
+
+.msg_bob {
+    text-align: center;
+    margin-top: 10%;
+    width: 100%;
+    margin: 0 auto;
+}
+.msg_bob > img {
+    width: 60%;
+    left:0px;
+    top:4%;
+}
+.msg_bob div {
+    position: absolute;
+    width: 50%;
+    left:0px;
+    top:3%;
+    border: solid 1px;
+    display: none;
+}
+.msg_bob label {
+    font-size: 10px;
+}
+
+.check_img{
+    position:relative;
+    height: 80%;
+    width:23%;
+    right: 0px;
+    border-left: dashed;
+    border-left-width: 1px;
+}
+
+.bg {
+    background: url("../img/main_bg.png") repeat;
+}
+
+.check_sec table{
+    width:100%;
+    margin-top: 5%;
+}
+.info_div {
+    width:100%;
+    height: 45%;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+.info_div > .touch_text {
+    width: 100%;
+    text-align: center;
+}
+.touch_text a {
+    width: 100%;
+    text-decoration: none;
+    font-size: 10px;
+    text-align: center;
+}
+
