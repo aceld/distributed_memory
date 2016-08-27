@@ -217,7 +217,7 @@ int main ()
 
                 //将标准输出重定向到写管道
                 dup2(pfd[1], STDOUT_FILENO);
-                execlp("fdfs_file_info", "fdfs_file_info", "./conf/client.conf", fdfs_file_path, NULL);
+                execlp("fdfs_file_info", "fdfs_file_info", "./conf/client/client.conf", fdfs_file_path, NULL);
             }
 
             //关闭写管道
