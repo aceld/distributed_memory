@@ -54,3 +54,6 @@ cgi_bin/login     ----处理文件登陆后台cgi程序
 
 start_up.sh
 
+
+test1  xiugai
+
