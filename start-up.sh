@@ -6,7 +6,7 @@ spawn-fcgi -a 127.0.0.1 -p 8084 -f ./cgi_bin/login
 
 
 #启动redis服务器
-redis-server ./conf/redis.conf
+redis-server ./conf/web-server/redis.conf
 
 #启动mySQL服务器
 
@@ -24,7 +24,7 @@ sudo iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 23000 -j ACCEP
 #sudo iptables -A INPUT -p tcp --dport 3306 -j ACCEPT
 
 #启动本地tracker
-sudo /usr/bin/fdfs_trackerd ./conf/tracker.conf restart
+sudo /usr/bin/fdfs_trackerd ./conf/tracker/tracker.conf restart
 #启动本地storage
-#sudo /usr/bin/fdfs_storaged ./conf/storage.conf restart
+#sudo /usr/bin/fdfs_storaged ./conf/storage/storage.conf restart
 

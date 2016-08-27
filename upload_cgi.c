@@ -182,7 +182,7 @@ int main ()
                 //将标准输出重定向到写管道
                 dup2(pfd[1], STDOUT_FILENO);
 
-                execlp("fdfs_upload_file", "fdfs_upload_file", "./conf/client.conf", filename, NULL);
+                execlp("fdfs_upload_file", "fdfs_upload_file", "./conf/client/client.conf", filename, NULL);
 
                 printf("execlp fdfs_upload_file error\n");
                 close(pfd[1]);
