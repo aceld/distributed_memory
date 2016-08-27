@@ -6,8 +6,11 @@
 ### 应用服务器配置
 
 配置文件在 ./conf/web-server/
+
 * nginx.conf ----nginx服务器配置文件
+
 * redis.conf ----redis服务器配置文件
+
 
 ### 前端界面
 
@@ -22,11 +25,16 @@
 
 存储服务器配置文件 ./conf/storage.conf  
 
-nginx中fastDFS模块配置文件 ./conf/mod_fastdfs.conf ---> /etc/fdfs/下
-                           ./conf/mime.types       ---> /etc/fdfs/下
-                           ./conf/http.conf        ---> /etc/fdfs/下
+nginx中fastDFS模块配置文件 
+
+    ./conf/mod_fastdfs.conf ---> /etc/fdfs/下
+
+    ./conf/mime.types       ---> /etc/fdfs/下
+
+    ./conf/http.conf        ---> /etc/fdfs/下
 
 * tracker ./conf/tracker.conf
+
 * client  ./conf/client.conf
 
 
