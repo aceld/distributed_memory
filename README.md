@@ -34,8 +34,11 @@ nginx中fastDFS模块配置文件 ./conf/mod_fastdfs.conf ---> /etc/fdfs/下
 
 make 后会生成 
 cgi_bin/upload    ----处理文件上传后台cgi程序
+
 cgi_bin/data      ----处理展示主界面后台cgi程序
+
 cgi_bin/reg       ----处理用户注册后台cgi程序
+
 cgi_bin/login     ----处理文件登陆后台cgi程序
 
 ##3. 启动脚本
