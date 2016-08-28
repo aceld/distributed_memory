@@ -1,0 +1,3 @@
+user:root
+pwd:itcast
+database:dstorage
