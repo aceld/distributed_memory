@@ -1,5 +1,8 @@
 # distributed_memory
 
+>###作者：刘丹冰
+>###email: danbing_at@163.com
+
 
 ##1. 配置文件
 
@@ -55,5 +58,7 @@ cgi_bin/login     ----处理文件登陆后台cgi程序
 start_up.sh
 
 
-test1  xiugai
+##4. 部署脚本
 
+>web-server服务器端
+un-package-web-server.sh
