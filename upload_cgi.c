@@ -28,12 +28,27 @@ int main ()
     time_t now;;
     char create_time[25];
     char suffix[10];
+    char user[128] = {0};
     
 
 
     while (FCGI_Accept() >= 0) {
         char *contentLength = getenv("CONTENT_LENGTH");
         int len;
+
+        char *query_string = getenv("QUERY_STRING");
+
+        //得到用户名
+        query_parse_key_value(query_string, "user", user, NULL);
+        if (strlen(user) == 0) {
+            LOG(UPLOAD_LOG_MODULE, UPLOAD_LOG_PROC, "get user has no value!!", user);
+            break;                
+        }
+        else {
+            LOG(UPLOAD_LOG_MODULE, UPLOAD_LOG_PROC, "get user = [%s]", user);
+        }
+
+
 
         printf("Content-type: text/html\r\n"
                 "\r\n");
@@ -183,8 +198,7 @@ int main ()
                 dup2(pfd[1], STDOUT_FILENO);
 
                 execlp("fdfs_upload_file", "fdfs_upload_file", "./conf/client/client.conf", filename, NULL);
-
-                printf("execlp fdfs_upload_file error\n");
+                LOG(UPLOAD_LOG_MODULE, UPLOAD_LOG_PROC, "execlp fdfs_upload_file error\n");
                 close(pfd[1]);
             }
 
@@ -197,7 +211,7 @@ int main ()
             trim_space(fdfs_file_path);
             
             if (strlen(fdfs_file_path) == 0) {
-                printf("[upload FAILED!]");
+                LOG(UPLOAD_LOG_MODULE, UPLOAD_LOG_PROC,"[upload FAILED!]");
                 goto END;
             }
             wait(NULL);
@@ -289,15 +303,16 @@ int main ()
             strftime(create_time, 24, "%Y-%m-%d %H:%M:%S", localtime(&now));
             strcat(redis_value_buf, create_time);
             strcat(redis_value_buf, REDIS_DILIMT);
-            //user TODO
-            strcat(redis_value_buf, "itcast");
+            strcat(redis_value_buf, user);
             strcat(redis_value_buf, REDIS_DILIMT);
             //type
             get_file_suffix(filename, suffix);
             strcat(redis_value_buf, suffix);
 
+            //将文件插入到FILE_INFO_LIST表中
             rop_list_push(redis_conn, FILE_INFO_LIST, redis_value_buf);
 
+            //将文件插入到FILE_HOT_ZSET中，默认的权值是1
             rop_zset_increment(redis_conn, FILE_HOT_ZSET, fdfs_file_path);
 
 
@@ -314,6 +329,7 @@ END:
             memset(fdfs_file_stat_buf, 0, 256);
             memset(fdfs_file_host_name, 0, 30);
             memset(fdfs_file_url, 0, 512);
+            memset(user, 0, 128);
 
             free(file_buf);
             //printf("date: %s\r\n", getenv("QUERY_STRING"));
