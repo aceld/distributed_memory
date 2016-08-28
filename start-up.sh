@@ -11,11 +11,11 @@ redis-server ./conf/web-server/redis.conf
 #启动mySQL服务器
 
 #启动nginx服务器
-sudo /usr/local/nginx/nginx
+sudo /usr/local/nginx/sbin/nginx
 
 if [ $? != 0 ]; then
     echo "reload"
-    sudo /usr/local/nginx/nginx -s reload
+    sudo /usr/local/nginx/sbin/nginx -s reload
 fi
 
 #强制开启防火墙 端口
