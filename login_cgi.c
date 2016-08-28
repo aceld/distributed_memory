@@ -65,7 +65,7 @@ int check_username(char *username, char *pwd)
     char sql_cmd[SQL_MAX_LEN] = {0};
     int retn = 0;
 
-    MYSQL *conn = msql_conn("root", "177696", "itcast");
+    MYSQL *conn = msql_conn(MYSQL_USER, MYSQL_PWD, MYSQL_DATABASE);
     if (conn == NULL) {
         return -1;
     }

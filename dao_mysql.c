@@ -63,7 +63,7 @@ int main(void)
 {
     char buffer[SQL_MAX_LEN] = {0};
 
-    MYSQL *conn = msql_conn("root", "177696", "itcast");
+    MYSQL *conn = msql_conn(MYSQL_USER, MYSQL_PWD, MYSQL_DATABASE);
     if (conn == NULL) {
         return 1;
     }

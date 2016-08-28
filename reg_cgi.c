@@ -41,7 +41,7 @@ void deal_reg_query(void)
     query_parse_key_value(query_string, "email", email, NULL);
 
     //入库 
-    MYSQL *conn = msql_conn("root", "177696", "itcast");
+    MYSQL *conn = msql_conn(MYSQL_USER, MYSQL_PWD, MYSQL_DATABASE);
     if (conn == NULL) {
         return;
     }
