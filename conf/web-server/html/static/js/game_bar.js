@@ -10,6 +10,8 @@ Zepto(document).on('ajaxSuccess', function(e,xhr,options) {
 
 var CLICKEVENT = 'tap';
 var ISMOBILE = 1;
+var username="";
+var password="";
 
 /*
 function testAjax() {
@@ -57,10 +59,10 @@ function loadGamesJson() {
 var alreadyLoadGameCnt=0;
 var perLoadCnt = 8;
 function loadGamesBar(fromId, cnt, kind) {
-    Zepto.ajax({type:'get',url:'/data', data:{cmd: kind, fromId:fromId, count:cnt}, dataType:'json',success:function(data){
+    Zepto.ajax({type:'get',url:'/data', data:{cmd: kind, fromId:fromId, count:cnt, user:getCookieValue("username")}, dataType:'json',success:function(data){
         var games = eval(data.games);
         for (var i = 0; i < games.length; i++) {
-            addOneGameBar(games[i].id, games[i].title_m, games[i].url, games[i].picurl_m, games[i].pv, games[i].descrip, games[i].hot);
+            addOneGameBar(games[i].id, games[i].title_m, games[i].url, games[i].picurl_m, games[i].pv, games[i].descrip, games[i].hot, games[i].title_s);
             alreadyLoadGameCnt++;
         }
         myScroll.refresh();
@@ -76,7 +78,7 @@ function loadGamesBarBykind(fromId, cnt, kind, type) {
     Zepto.ajax({type:'get',url:'/data', data:{cmd: kind, fromId:fromId, count:cnt, kind:type}, dataType:'json',success:function(data){
         var games = eval(data.games);
         for (var i = 0; i < games.length; i++) {
-            addOneGameBar(games[i].id, games[i].title_m, games[i].url, games[i].picurl_m, games[i].pv, games[i].descrip, games[i].hot);
+            addOneGameBar(games[i].id, games[i].title_m, games[i].url, games[i].picurl_m, games[i].pv, games[i].descrip, games[i].hot,games[i].title_s);
             alreadyLoadGameCnt++;
         }
         myScroll.refresh();
@@ -101,7 +103,7 @@ function clickGame(id,name,url) {
 
 //作为游戏图片的id索引值
 var game_logo_id = 0;
-function addOneGameBar(id, name, url, picurl, pv, desc, hot) {
+function addOneGameBar(id, name, url, picurl, pv, desc, hot, user) {
     var liObj = Zepto("<li>");
     var barObj = Zepto("<div>").attr("class", "game_opt");
     var aObj = Zepto("<a>").html("下载文件");
@@ -114,8 +116,7 @@ function addOneGameBar(id, name, url, picurl, pv, desc, hot) {
     var hotObj = Zepto("<div>").attr("class", "game_hot");
     var starObj = Zepto("<span>").attr("class", "star_icon");
     var pvObj = Zepto("<i>").html("下载次数: "+pv);
-
-    var descObj = Zepto("<p>").html(desc);
+    var descObj = Zepto("<p>").html(desc+" ["+user+"]");
 
 
     if (hot == 1) {
@@ -579,6 +580,14 @@ window.onload = function() {
     checkPC();
 
     bindEvent();
+
+    username = getCookieValue("username");
+    password = getCookieValue("password");
+
+    if (username == "") {
+        alert("请先登录");
+        location.href="/login.html";
+    }
 
 
     if (ISMOBILE == 0) {

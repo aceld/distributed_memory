@@ -56,6 +56,7 @@ void print_file_list_json(int fromId, int count, char *cmd, char *kind)
     char pic_name[PIC_NAME_LEN] = {0};
     char file_url[FILE_NAME_LEN] = {0};
     char file_id[FILE_NAME_LEN] = {0};
+    char user[128] = {0};
     int retn = 0;
     int endId = fromId + count - 1;
     int score = 0;
@@ -103,7 +104,8 @@ void print_file_list_json(int fromId, int count, char *cmd, char *kind)
         cJSON_AddStringToObject(item, "title_m", filename);
 
         //title_s
-        cJSON_AddStringToObject(item, "title_s", "文件title_s");
+        get_value_by_col(file_list_values[i], 5, user, VALUES_ID_SIZE-1, 0);
+        cJSON_AddStringToObject(item, "title_s", user);
 
         //time
         get_value_by_col(file_list_values[i], 4, create_time, VALUES_ID_SIZE-1, 0);
@@ -191,6 +193,7 @@ int main (void)
         else if (strcmp(cmd, "increase") == 0) {
             //文件被点击
 
+            //得到点击的fileId
             query_parse_key_value(query, "fileId", fileId, NULL);
             LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "=== fileId:%s,cmd:%s", fileId,  cmd);
 

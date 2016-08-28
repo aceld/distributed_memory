@@ -122,6 +122,14 @@
                 }
                 else {
                     //location.href = $("#nextpage").attr("value") + "?username=" + username;
+
+                     deleteCookie("username","/");
+                     deleteCookie("passwd","/");
+
+                    //set cookie
+                    addCookie("username", username, 7, "/");
+                    addCookie("passwd", username, 7, "/");
+                     
                     location.href="/?username="+username;
                 }
             } )

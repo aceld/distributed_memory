@@ -44,8 +44,8 @@
         <div class="check_sec">
             <table id="checkbox_table" style="width:100%;" >
                 <tr align="center">
-                    <td  align="center"><input type='checkbox' name='option' value="1">记住密码</td>
-                    <td  align="center"><input type='checkbox' name='option' value="2">自动登录<br></td>
+                    <td  align="center"><input type='checkbox'id="chkRememberPass" name='option' value="1">记住密码</td>
+                    <td  align="center"><input type='checkbox' id= "autoLogin" name='option' value="2">自动登录<br></td>
                 </tr>
             </table>
         </div>
@@ -98,6 +98,8 @@
                     //location.href = $("#nextpage").attr("value");
 
                     //set cookie
+                    addCookie("username", username, 7, "/");
+                    addCookie("passwd", username, 7, "/");
 
                     location.href="/?username="+username;
                 }
