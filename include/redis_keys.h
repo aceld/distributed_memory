@@ -6,6 +6,9 @@
 #ifndef _REDIS_KEYS_H_
 #define _REDIS_KEYS_H_
 
+#define REDIS_SERVER_IP     "127.0.0.1"
+#define REDIS_SERVER_PORT   "6379"
+
 
 #define KEY_NAME_SIZ                (50)
 #define REDIS_DILIMT                "|"

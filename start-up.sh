@@ -1,3 +1,4 @@
+
 #启动 必要的业务后台cgi应用程序
 spawn-fcgi -a 127.0.0.1 -p 8085 -f ./cgi_bin/data
 spawn-fcgi -a 127.0.0.1 -p 8081 -f ./cgi_bin/reg
@@ -11,12 +12,12 @@ redis-server ./conf/web-server/redis.conf
 #启动mySQL服务器
 
 #启动nginx服务器
-sudo /usr/local/nginx/sbin/nginx
+sudo /usr/local/nginx/sbin/nginx -s reload
 
-if [ $? != 0 ]; then
-    echo "reload"
-    sudo /usr/local/nginx/sbin/nginx -s reload
-fi
+#if [ $? != 0 ]; then
+#    echo "reload"
+#    sudo /usr/local/nginx/sbin/nginx -s reload
+#fi
 
 #强制开启防火墙 端口
 sudo iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 22122 -j ACCEPT

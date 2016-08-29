@@ -18,7 +18,10 @@ cd fastdfs-5.05/
 ./make.sh
 sudo ./make.sh install
 
+#fdfs-tracker
 sudo mkdir -p /usr/fastdfs/tracker/
+#fdfs-client
+sudo mkdir -p /usr/fastdfs/client/
 
 cd ..
 #redis-server

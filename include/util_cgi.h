@@ -12,16 +12,21 @@
 
 #include "make_log.h"
 
-#define USER_NAME_LEN   (256)
-#define PWD_LEN         (256)
-#define HOST_NAME_LEN   (128)
-#define FILE_NAME_LEN   (256)
-#define PIC_URL_LEN     (256)
-#define PIC_NAME_LEN    (10)
-#define FILE_URL_LEN    (512)
+#define USER_NAME_LEN       (128)
+#define PWD_LEN             (256)
+#define HOST_NAME_LEN       (30)
+#define FILE_NAME_LEN       (256)
+#define PIC_URL_LEN         (256)
+#define PIC_NAME_LEN        (10)
+#define FILE_URL_LEN        (512)
+#define TEMP_BUF_MAX_LEN    (256)
+#define SUFFIX_LEN          (8)
+#define TIME_STRING_LEN     (25)
 
-#define UTIL_LOG_MODULE     "util"
-#define UTIL_LOG_PROC     "base"
+#define FDFS_CLIENT_CONF    "./conf/client/client.conf"
+
+#define UTIL_LOG_MODULE     "cgi"
+#define UTIL_LOG_PROC       "util"
 
 
 
