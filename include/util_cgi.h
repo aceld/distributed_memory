@@ -28,6 +28,8 @@
 #define UTIL_LOG_MODULE     "cgi"
 #define UTIL_LOG_PROC       "util"
 
+#define GET_URL_DYNAMIC     (1)//是否开启动态获取文件url
+
 
 
 void cgi_init(void);

@@ -8,6 +8,7 @@ cd libfastcommon-1.0.7/
 sudo ./make.sh install
 
 sudo ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so
+sudo ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so
 
 
 cd ..

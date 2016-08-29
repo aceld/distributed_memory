@@ -1,8 +1,8 @@
 
 CC=gcc
-CPPFLAGS=-I./include -I./ -I/usr/include/mysql/
+CPPFLAGS=-I./include -I./ -I/usr/include/mysql/ -I/usr/include/fastdfs/ -I/usr/include/fastcommon/
 CFLAGS=-Wall 
-LIBS= -lfcgi -lm -lmysqlclient -lhiredis
+LIBS= -lfcgi -lm -lmysqlclient -lhiredis -lfdfsclient
 
 #找到当前目录下所有的.c文件
 src = $(wildcard *.c)

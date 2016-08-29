@@ -5,6 +5,8 @@
 #include <fcntl.h>
 
 
+#include "fdfs_client.h"
+#include "shared_func.h"
 #include "fcgi_stdio.h"
 #include "fcgi_config.h"
 #include "cJSON.h"
@@ -36,6 +38,42 @@ void increase_file_pv(char *file_id)
 
 
     rop_disconnect(redis_conn);
+}
+
+int get_file_url_dynamic(char *file_id, char *file_url)
+{
+    int result;
+    FDFSFileInfo file_info;
+
+	if ((result=fdfs_client_init(FDFS_CLIENT_CONF)) != 0)
+	{
+        LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "fdfs_client_init error");
+		return result;
+	}
+
+    memset(&file_info, 0, sizeof(file_info));
+
+	result = fdfs_get_file_info_ex1(file_id, true, &file_info);
+	if (result != 0)
+	{
+		LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "query file info fail, " \
+			"error no: %d, error info: %s\n", \
+			result, STRERROR(result));
+	}
+    else {
+        memset(file_url, 0, FILE_NAME_LEN);
+        strcat(file_url, "http://");
+        strcat(file_url, file_info.source_ip_addr);
+        strcat(file_url, "/");
+        strcat(file_url, file_id);
+
+        //LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "file_url[%s]", file_url);
+    }
+
+	tracker_close_all_connections();
+	fdfs_client_destroy();
+
+    return result;
 }
 
 
@@ -124,7 +162,11 @@ void print_file_list_json(int fromId, int count, char *cmd, char *kind)
         cJSON_AddStringToObject(item, "picurl_m", picurl);
 
         //url
+#if GET_URL_DYNAMIC
+        get_file_url_dynamic(file_id, file_url);
+#else
         get_value_by_col(file_list_values[i], 2, file_url, VALUES_ID_SIZE-1, 0);
+#endif
         cJSON_AddStringToObject(item, "url", file_url);
         LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "file_url=%s\n", file_url);
 
