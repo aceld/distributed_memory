@@ -1,3 +1,10 @@
+/**
+ * @file dao_mysql.c
+ * @brief  mysql 接口包裹
+ * @author liu_danbing
+ * @version 1.0
+ * @date 2016-08-29
+ */
 #include "dao_mysql.h"
 
 

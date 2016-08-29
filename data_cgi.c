@@ -1,3 +1,10 @@
+/**
+ * @file data_cgi.c
+ * @brief  处理首页展示cgi程序
+ * @author liu_danbing
+ * @version 1.0
+ * @date 2016-08-29
+ */
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>

@@ -1,6 +1,9 @@
 /**
  * @file redis_op.c
- * @brief  redis 操作基本接口和key的操作实现
+ * @brief  redisAPI封装包裹
+ * @author liu_danbing
+ * @version 1.0
+ * @date 2016-08-29
  */
 
 #include "redis_op.h"

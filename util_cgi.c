@@ -1,3 +1,10 @@
+/**
+ * @file util_cgi.c
+ * @brief  cgi后台通用接口
+ * @author liu_danbing
+ * @version 1.0
+ * @date 2016-08-29
+ */
 #include "util_cgi.h"
 #include "make_log.h"
 

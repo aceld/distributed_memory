@@ -1,4 +1,3 @@
-
 cd ./Package/
 
 #fastDFS-common
@@ -18,7 +17,16 @@ cd fastdfs-5.05/
 ./make.sh
 sudo ./make.sh install
 
-#fdfs-tracker
-sudo mkdir -p /usr/fastdfs/tracker/
+#fdfs-storage
+sudo mkdir -p /usr/fastdfs/storage/
+sudo mkdir -p /usr/fastdfs/fastdfs0/
 
 
+#fdfs-nginx-module
+cd ..
+#nginx
+tar -zxvf nginx-1.10.1.tar.gz
+cd nginx-1.10.1/
+./configure --add-module
+make
+sudo make install

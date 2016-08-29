@@ -1,3 +1,10 @@
+/**
+ * @file login_cgi.c
+ * @brief   登陆后台CGI程序  
+ * @author liu_danbing
+ * @version 1.0
+ * @date 2016-08-29
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
