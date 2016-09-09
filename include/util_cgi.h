@@ -15,6 +15,7 @@
 #define USER_NAME_LEN       (128)
 #define PWD_LEN             (256)
 #define HOST_NAME_LEN       (30)
+#define PORT_LEN            (10)
 #define FILE_NAME_LEN       (256)
 #define PIC_URL_LEN         (256)
 #define PIC_NAME_LEN        (10)

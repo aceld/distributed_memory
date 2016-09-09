@@ -9,6 +9,8 @@
 #include "make_log.h"
 
 char g_host_name[HOST_NAME_LEN] = "http://192.168.2.102";
+char g_web_server_port[PORT_LEN]        = "80";
+char g_storage_web_port[PORT_LEN]       = "80";
 
 //find 'substr' from a fixed-length buffer   
 //('full_data' will be treated as binary data buffer)  
@@ -53,12 +55,28 @@ void cgi_init(void)
         //LOG(UTIL_LOG_MODULE, UTIL_LOG_PROC, "open ./conf/HOSTNAME error");
         return ;
     }
-
     fstat(fd, &st_buf);
     len = st_buf.st_size;
 
     read(fd, g_host_name, len);
     trim_space(g_host_name);
+    close(fd);
+
+
+    fd = open("./conf/STORAGE_WEB_PORT", O_RDONLY);
+    fstat(fd, &st_buf);
+    len = st_buf.st_size;
+
+    read(fd, g_storage_web_port, len);
+    trim_space(g_storage_web_port);
+    close(fd);
+
+    fd = open("./conf/WEB_SERVER_PORT", O_RDONLY);
+    fstat(fd, &st_buf);
+    len = st_buf.st_size;
+
+    read(fd, g_web_server_port, len);
+    trim_space(g_web_server_port);
     close(fd);
 
 }

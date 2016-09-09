@@ -21,6 +21,8 @@
 #define UPLOAD_LOG_MODULE "cgi"
 #define UPLOAD_LOG_PROC   "upload"
 
+extern char g_storage_web_port[PORT_LEN];
+
 
 /* -------------------------------------------*/
 /**
@@ -312,6 +314,8 @@ int make_file_url(char *fileid, char *fdfs_file_url)
 
     strcat(fdfs_file_url, "http://");
     strcat(fdfs_file_url, fdfs_file_host_name);
+    strcat(fdfs_file_url, ":");
+    strcat(fdfs_file_url, g_storage_web_port);
     strcat(fdfs_file_url, "/");
     strcat(fdfs_file_url, fileid);
 

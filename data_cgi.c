@@ -28,6 +28,8 @@
 
 
 extern char g_host_name[HOST_NAME_LEN];
+extern char g_storage_web_port[PORT_LEN];
+extern char g_web_server_port[PORT_LEN];
 
 
 void increase_file_pv(char *file_id)
@@ -71,6 +73,8 @@ int get_file_url_dynamic(char *file_id, char *file_url)
         memset(file_url, 0, FILE_NAME_LEN);
         strcat(file_url, "http://");
         strcat(file_url, file_info.source_ip_addr);
+        strcat(file_url, ":");
+        strcat(file_url, g_storage_web_port);
         strcat(file_url, "/");
         strcat(file_url, file_id);
 
@@ -110,7 +114,7 @@ void print_file_list_json(int fromId, int count, char *cmd, char *kind)
     int value_num;
     redisContext *redis_conn = NULL;
 
-    redis_conn = rop_connectdb_nopwd("127.0.0.1", "6379");
+    redis_conn = rop_connectdb_nopwd(REDIS_SERVER_IP, REDIS_SERVER_PORT);
     if (redis_conn == NULL) {
         LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "redis connected error");
         return;
@@ -160,6 +164,8 @@ void print_file_list_json(int fromId, int count, char *cmd, char *kind)
         //picurl_m
         memset(picurl, 0, PIC_URL_LEN);
         strcat(picurl, g_host_name);
+        strcat(picurl, ":");
+        strcat(picurl, g_web_server_port);
         strcat(picurl, "/static/file_png/");
 
 
