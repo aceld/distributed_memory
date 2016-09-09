@@ -7,6 +7,7 @@
  */
 #include "util_cgi.h"
 #include "make_log.h"
+#include "config.h"
 
 char g_host_name[HOST_NAME_LEN] = "http://192.168.2.102";
 char g_web_server_port[PORT_LEN]        = "80";
@@ -50,6 +51,17 @@ void cgi_init(void)
     struct stat st_buf;
     int len = 0;
 
+
+    //web-server host_name
+    GetProfileString("./conf/dstorage.conf", "web_server", "host_name", g_host_name);
+
+    //web-server port
+    GetProfileString("./conf/dstorage.conf", "web_server", "port", g_web_server_port);
+
+    //storage-web-server port
+    GetProfileString("./conf/dstorage.conf", "storage_web_server", "port", g_storage_web_port);
+
+#if 0
     fd = open("./conf/HOST_NAME", O_RDONLY);
     if (fd < 0) {
         //LOG(UTIL_LOG_MODULE, UTIL_LOG_PROC, "open ./conf/HOSTNAME error");
@@ -78,6 +90,7 @@ void cgi_init(void)
     read(fd, g_web_server_port, len);
     trim_space(g_web_server_port);
     close(fd);
+#endif
 
 }
 
