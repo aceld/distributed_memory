@@ -11,13 +11,16 @@ src = $(wildcard *.c)
 obj = $(patsubst %.c, %.o, $(src))
 
 
+#test
+test_config=test/test_config
 
+#cgi
 upload=cgi_bin/upload
 data=cgi_bin/data
 reg=cgi_bin/reg
 login=cgi_bin/login
 
-target=$(upload) $(data) $(reg) $(login)
+target=$(upload) $(data) $(reg) $(login) $(test_config)
 
 
 ALL:$(target)
@@ -29,19 +32,57 @@ $(obj):%.o:%.c
 
 
 #upload cgi程序
-$(upload):upload_cgi.o cJSON.o dao_mysql.o util_cgi.o make_log.o redis_op.o
+$(upload):upload_cgi.o \
+          cJSON.o \
+          dao_mysql.o \
+          util_cgi.o \
+          make_log.o \
+          redis_op.o \
+          config.o
+
 	$(CC) $^ -o $@ $(LIBS)
+
 
 #data cgi程序
-$(data): data_cgi.o cJSON.o dao_mysql.o util_cgi.o make_log.o redis_op.o
+$(data): data_cgi.o \
+         cJSON.o \
+         dao_mysql.o \
+         util_cgi.o \
+         make_log.o \
+         redis_op.o \
+         config.o
+
 	$(CC) $^ -o $@ $(LIBS)
+
 
 #reg cgi程序
-$(reg): reg_cgi.o cJSON.o dao_mysql.o util_cgi.o make_log.o redis_op.o
+$(reg): reg_cgi.o \
+        cJSON.o \
+        dao_mysql.o \
+        util_cgi.o \
+        make_log.o \
+        redis_op.o \
+        config.o
+
 	$(CC) $^ -o $@ $(LIBS)
 
+
 #login cgi程序
-$(login): login_cgi.o cJSON.o dao_mysql.o util_cgi.o make_log.o redis_op.o
+$(login): login_cgi.o \
+          cJSON.o \
+          dao_mysql.o \
+          util_cgi.o \
+          make_log.o \
+          redis_op.o \
+          config.o
+
+	$(CC) $^ -o $@ $(LIBS)
+
+
+#test_config 程序
+$(test_config): test/test_config.o \
+                config.o
+
 	$(CC) $^ -o $@ $(LIBS)
 
 
@@ -50,10 +91,10 @@ $(login): login_cgi.o cJSON.o dao_mysql.o util_cgi.o make_log.o redis_op.o
 #clean指令
 
 clean:
-	-rm -rf $(obj) $(target)
+	-rm -rf $(obj) $(target) ./test/*.o
 
 distclean:
-	-rm -rf $(obj) $(target)
+	-rm -rf $(obj) $(target) ./test/*.o
 
 #将clean目标 改成一个虚拟符号
 .PHONY: clean ALL distclean
