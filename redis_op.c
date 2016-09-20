@@ -652,6 +652,83 @@ END:
 
 /* -------------------------------------------*/
 /**
+ * @brief  想一个hash表中添加一条 key-value 数据
+ *
+ * @param conn  redis连接
+ * @param key   哈希表名
+ * @param field 
+ * @param value
+ *
+ * @returns   
+ *            0        succ
+ *            -1        FAIL
+ */
+/* -------------------------------------------*/
+int rop_hash_set(redisContext *conn, char *key, char *field, char *value)
+{
+    int retn = 0;
+    redisReply *reply = NULL;
+
+    reply =  redisCommand(conn, "hset %s %s %s", key, field, value);
+	if (reply == NULL || reply->type != REDIS_REPLY_INTEGER) {
+		LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "[-][GMS_REDIS]hset %s %s %s error %s\n", key, field, value,conn->errstr);	
+		retn =  -1;
+		goto END;
+	}
+
+	
+END:
+	freeReplyObject(reply);
+
+    return retn;
+}
+
+/* -------------------------------------------*/
+/**
+ * @brief  从一个hash表中取出一条 key-value 数据
+ *
+ * @param conn  redis连接
+ * @param key   哈希表名
+ * @param field 字段名称 
+ * @param value 得到的数据， 需要先开辟内存
+ *
+ * @returns   
+ *            0        succ
+ *            -1        FAIL
+ */
+/* -------------------------------------------*/
+int rop_hash_get(redisContext *conn, char *key, char *field, char *value)
+{
+    int retn = 0;
+    int len = 0;
+
+    redisReply *reply = NULL;
+
+    reply =  redisCommand(conn, "hget %s %s", key, field);
+	if (reply == NULL || reply->type != REDIS_REPLY_STRING) {
+		LOG(REDIS_LOG_MODULE, REDIS_LOG_PROC, "[-][GMS_REDIS]hget %s %s  error %s\n", key, field, conn->errstr);	
+		retn =  -1;
+		goto END;
+	}
+
+
+    len = reply->len > VALUES_ID_SIZE? VALUES_ID_SIZE:reply->len ; 
+
+    strncpy(value, reply->str, len);
+
+    value[len] = '\0';
+
+	
+END:
+	freeReplyObject(reply);
+
+
+    return retn;
+}
+
+
+/* -------------------------------------------*/
+/**
  * @brief			创建或者覆盖一个HASH表
  *
  * @param conn				已建立好的链接

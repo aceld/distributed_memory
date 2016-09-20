@@ -236,6 +236,38 @@ int rop_hash_set_append(redisContext *conn, char *key, RFIELDS fields, RVALUES v
 
 /* -------------------------------------------*/
 /**
+ * @brief  向一个hash表中添加一条 key-value 数据
+ *
+ * @param conn  redis连接
+ * @param key   哈希表名
+ * @param field 
+ * @param value
+ *
+ * @returns   
+ *            0        succ
+ *            -1        FAIL
+ */
+/* -------------------------------------------*/
+int rop_hash_set(redisContext *conn, char *key, char *field, char *value);
+
+/* -------------------------------------------*/
+/**
+ * @brief  从一个hash表中取出一条 key-value 数据
+ *
+ * @param conn  redis连接
+ * @param key   哈希表名
+ * @param field 字段名称 
+ * @param value 得到的数据， 需要先开辟内存
+ *
+ * @returns   
+ *            0        succ
+ *            -1        FAIL
+ */
+/* -------------------------------------------*/
+int rop_hash_get(redisContext *conn, char *key, char *field, char *value);
+
+/* -------------------------------------------*/
+/**
  * @brief        将指定的zset表，对应的成员，值自增1
  *                （key 或 成员不存在 则创建）
  *

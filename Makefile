@@ -13,6 +13,7 @@ obj = $(patsubst %.c, %.o, $(src))
 
 #test
 test_config=test/test_config
+test_redis=test/test_redis
 
 #cgi
 upload=cgi_bin/upload
@@ -20,7 +21,7 @@ data=cgi_bin/data
 reg=cgi_bin/reg
 login=cgi_bin/login
 
-target=$(upload) $(data) $(reg) $(login) $(test_config)
+target=$(upload) $(data) $(reg) $(login) $(test_config) $(test_redis)
 
 
 ALL:$(target)
@@ -82,6 +83,13 @@ $(login): login_cgi.o \
 #test_config 程序
 $(test_config): test/test_config.o \
                 config.o
+
+	$(CC) $^ -o $@ $(LIBS)
+
+#test_redis 程序
+$(test_redis): test/test_redis_main.o \
+                redis_op.o \
+                make_log.o 
 
 	$(CC) $^ -o $@ $(LIBS)
 

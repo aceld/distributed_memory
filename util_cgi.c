@@ -47,9 +47,11 @@ char* memstr(char* full_data, int full_data_len, char* substr)
 
 void cgi_init(void)
 {
+#if 0
     int fd = 0;
     struct stat st_buf;
     int len = 0;
+#endif
 
 
     //web-server host_name

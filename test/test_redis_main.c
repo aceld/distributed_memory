@@ -73,6 +73,25 @@ int main(int argc, char **argv)
     score = rop_zset_get_score(conn, "FILE_HOT_ZSET", "group1/M00/00/00/wKgCbFepTp2AUnd1AFRAAvu2TSg259.mp3");
     printf("score = %d\n", score);
 
+    printf("================  test rop_redis_hset ==========\n");
+    retn = rop_hash_set(conn, "my_test_hash_key", "name", "zhang3");
+    if (retn != 0) {
+        printf("rop hash set error!\n");
+    }
+    else {
+        printf("set succ!\n");
+    }
+
+    memset(get_value, 0, VALUES_ID_SIZE);
+    retn = rop_hash_get(conn, "my_test_hash_key", "name", get_value);
+    if (retn != 0) {
+        printf("rop hashget error!\n");
+    }
+    else {
+        printf("get succ!\n");
+        printf("%s\n", get_value);
+    }
+
 #if 0
 	/* 清空当前数据库所有数据 */
 	retn = rop_flush_database(conn);
