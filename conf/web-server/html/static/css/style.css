@@ -263,10 +263,10 @@ body {
     color: #071018; text-decoration:none;/*链接设置*/
 }
 
-/* 开始按键 */
+/* 下载按键 */
 .game_opt a {
     display: block;
-    width:22%;
+    width:11%;
     font-size:14px;
     text-decoration:none;
     font-weight:bold;

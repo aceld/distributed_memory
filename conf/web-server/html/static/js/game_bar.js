@@ -101,12 +101,24 @@ function clickGame(id,name,url) {
     location.href=url;
 }
 
+function shareFile(id, username) {
+    Zepto.ajax({type:'get', url:'/data', data:{cmd: 'shared', fileId:id, user:username}, dataType:'json', success:function(data) {
+        //console.log("post success!!!" + data.result);
+    }, error: function(xhr,type){
+        console.log("xhr="+xhr);
+        console.log("type="+type);
+    }});
+
+    location.href="/";
+}
+
 //作为游戏图片的id索引值
 var game_logo_id = 0;
 function addOneGameBar(id, name, url, picurl, pv, desc, hot, user) {
     var liObj = Zepto("<li>");
     var barObj = Zepto("<div>").attr("class", "game_opt");
-    var aObj = Zepto("<a>").html("下载文件");
+    var aObj = Zepto("<a>").html("下载");
+    var bObj = Zepto("<a>").html("分享");
     //var canvasObj = Zepto("<canvas>").attr("id", "game_logo_" + game_logo_id).attr("width", 60).attr("height", 60);
     var gameLogoObj = Zepto("<img>").attr("id", "game_logo_" + game_logo_id).attr("width", 60).attr("height", 60).attr("class", "game_logo_img");
     var infoObj = Zepto("<div>").attr("class", "game_info");
@@ -122,7 +134,7 @@ function addOneGameBar(id, name, url, picurl, pv, desc, hot, user) {
     if (hot == 1) {
         var titleObj = Zepto("<span>").attr("class", "img_title_new");
         barObj.append(titleObj);
-        titleObj.html("火爆");
+        titleObj.html("共享");
     }
 
 
@@ -138,6 +150,7 @@ function addOneGameBar(id, name, url, picurl, pv, desc, hot, user) {
     barObj.append(gameLogoObj);
     barObj.append(infoObj);
     barObj.append(aObj);
+    barObj.append(bObj);
     liObj.append(barObj).appendTo("#thelist");
     gameLogoObj.attr("src", picurl);
     //createCanvasFromUrl(game_logo_id,picurl, 0, 0);
@@ -166,6 +179,25 @@ function addOneGameBar(id, name, url, picurl, pv, desc, hot, user) {
         aObj.css("color", "#ffffff");
         aObj.css("background-color", "#0c4bba");
         aObj.css("border-color", "#0c4bba");
+    });
+
+
+    bObj.on(CLICKEVENT, function(e) {
+        shareFile(id, getCookieValue("username"))
+    });
+
+    bObj.css("background-color", "#ff6a6a");
+    bObj.css("border-color", "#ff6a6a");
+
+    bObj.on(CLICKEVENT, function(e){
+        bObj.css("color", "#ffffff");
+        bObj.css("background-color", "#eeb4b4");
+        bObj.css("border-color", "#eeb4b4");
+    });
+    bObj.on('longTap', function(e){
+        bObj.css("color", "#ffffff");
+        bObj.css("background-color", "#eeb4b4");
+        bObj.css("border-color", "#eeb4b4");
     });
 }
 
@@ -345,6 +377,22 @@ function selected_action(kind) {
         else {
             hideMenu();
             return;
+        }
+    } else if( kind == 'shareFile') {
+        if (menu_kind_selected == 0) {
+            menu_kind_selected = 1;
+            menu_game_new_selected=0;
+            menu_game_hot_selected=0;
+            //设置其他两个按钮未选中
+            Zepto(".new_icon img").attr("src", "static/img/icon_1@2x.png");
+            Zepto(".hot_icon img").attr("src", "static/img/icon_2@2x.png");
+            Zepto(".kind_icon img").attr("src", "static/img/icon_31@2x.png");
+
+            reloadGames('shareFile');
+        }
+        else {
+            menu_kind_selected = 0;
+            hideMenu();
         }
     } else if( kind == 'hotGame') {
         if (menu_game_hot_selected == 0) {
@@ -534,8 +582,13 @@ function bindEvent() {
         selected_action('group');
     });
 
+    /*
     Zepto("#menu_kind").on(CLICKEVENT, function(e) {
         selected_action('kind');
+    });
+    */
+    Zepto("#menu_kind").on(CLICKEVENT, function(e) {
+        selected_action('shareFile');
     });
 
     Zepto("#menu_kind_0").on(CLICKEVENT, function(e){

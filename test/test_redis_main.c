@@ -92,6 +92,18 @@ int main(int argc, char **argv)
         printf("%s\n", get_value);
     }
 
+    printf("================  test incr string  ==========\n");
+    int get_num = 0;
+    retn = rop_increment_string(conn, "id-num", &get_num);
+    if (retn != 0) {
+        printf("rop increment string error!\n");
+    }
+    else {
+        printf("incr  succ!\n");
+        printf("%d\n", get_num);
+    }
+
+
 #if 0
 	/* 清空当前数据库所有数据 */
 	retn = rop_flush_database(conn);

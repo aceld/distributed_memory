@@ -422,5 +422,50 @@ int rop_redis_command(redisContext *conn, char *cmd);
 /* -------------------------------------------*/
 void rop_test_reply_type(redisReply *reply);
 
+/* -------------------------------------------*/
+/**
+ * @brief  set 插入的stirng 命令
+ *
+ * @param conn 连接句柄
+ * @param key  
+ * @param value string 类型的value
+ *
+ * @returns   
+ *          0 succ, -1 fail
+ */
+/* -------------------------------------------*/
+int rop_set_string(redisContext *conn, char *key, char *value);
+
+/* -------------------------------------------*/
+/**
+ * @brief  get stirng 命令
+ *
+ * @param conn 连接句柄
+ * @param key  (in)
+ * @param value string 类型的value (out)
+ *              value需要先开辟空间
+ *
+ * @returns   
+ *          0 succ, -1 fail
+ */
+/* -------------------------------------------*/
+int rop_get_string(redisContext *conn, char *key, char *value);
+
+/* -------------------------------------------*/
+/**
+ * @brief       对一个string表的value进行累加，
+ *              并得到累加之后的结果
+ *
+ * @param conn
+ * @param key
+ * @param get_num  out 得到累加之后的结果
+ *
+ * @returns   
+ *            0        succ
+ *            -1        FAIL
+ */
+/* -------------------------------------------*/
+int rop_increment_string(redisContext *conn, char *key, int *get_num);
+
 
 #endif

@@ -326,6 +326,75 @@ int make_file_url(char *fileid, char *fdfs_file_url)
 
 /* -------------------------------------------*/
 /**
+ * @brief  将文件信息存储到redis数据库 多个hash表形式
+ *
+ * @param fileid
+ * @param fdfs_file_url
+ * @param filename
+ * @param user
+ *
+ * @returns   
+ *          0 succ, -1 fail
+ */
+/* -------------------------------------------*/
+int store_file_to_redis1(char *fileid, char *fdfs_file_url, char *filename, char *user)
+{
+    int retn = 0;
+    redisContext * redis_conn = NULL;
+
+    time_t now;;
+    char create_time[TIME_STRING_LEN];
+    char suffix[SUFFIX_LEN];
+    char user_id[10] = {0};
+    char file_user_list[KEY_NAME_SIZ] = {0};
+
+    redis_conn = rop_connectdb_nopwd(REDIS_SERVER_IP, REDIS_SERVER_PORT);
+    if (redis_conn == NULL) {
+        return retn;    
+    }
+
+
+    //FILEID_URL_HASH
+    rop_hash_set(redis_conn, FILEID_URL_HASH, fileid, fdfs_file_url);
+    //FILEID_NAME_HASH
+    rop_hash_set(redis_conn, FILEID_NAME_HASH, fileid, filename);
+    //FILEID_TIME_HASH
+    //create time
+    now = time(NULL);
+    strftime(create_time, TIME_STRING_LEN-1, "%Y-%m-%d %H:%M:%S", localtime(&now));
+    rop_hash_set(redis_conn, FILEID_TIME_HASH, fileid, create_time);
+    //FILEID_USER_HASH
+    rop_hash_set(redis_conn, FILEID_USER_HASH, fileid, user);
+    //FILEID_TYPE_HASH
+    get_file_suffix(filename, suffix);
+    rop_hash_set(redis_conn, FILEID_TYPE_HASH, fileid, suffix);
+
+    //FILEID_SHARED_STATUS_HASH(文件的共享状态)
+    rop_hash_set(redis_conn, FILEID_SHARED_STATUS_HASH, fileid, "0");
+
+
+
+    //将文件插入到FILE_HOT_ZSET中，默认的权值是1
+    rop_zset_increment(redis_conn, FILE_HOT_ZSET, fileid);
+
+
+    //将FILEID 插入到 用户私有列表中FILE_USER_LIST
+    rop_hash_get(redis_conn, USER_USERID_HASH,  user, user_id);
+    sprintf(file_user_list, "%s%s", FILE_USER_LIST, user_id);
+    rop_list_push(redis_conn, file_user_list, fileid);
+
+    //文件引用计数+1
+    rop_hincrement_one_field(redis_conn,FILE_REFERENCE_COUNT_HASH , fileid, 1);
+
+
+
+    rop_disconnect(redis_conn);
+    
+    return retn;
+}
+
+/* -------------------------------------------*/
+/**
  * @brief   将文件信息存储到redis数据库
  *
  * @param fileid
@@ -399,7 +468,10 @@ END:
 int store_file(char *fileid, char *fdfs_file_url, char *filename, char *user)
 {
     // 存入redis中
+#if 0
     return store_file_to_redis(fileid, fdfs_file_url, filename, user);
+#endif
+    return store_file_to_redis1(fileid, fdfs_file_url, filename, user);
 }
 
 int main ()

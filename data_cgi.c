@@ -36,7 +36,7 @@ void increase_file_pv(char *file_id)
 {
     redisContext *redis_conn = NULL;
 
-    redis_conn = rop_connectdb_nopwd("127.0.0.1", "6379");
+    redis_conn = rop_connectdb_nopwd(REDIS_SERVER_IP, REDIS_SERVER_PORT);
     if (redis_conn == NULL) {
         LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "redis connected error");
         return;
@@ -47,6 +47,33 @@ void increase_file_pv(char *file_id)
 
 
     rop_disconnect(redis_conn);
+}
+
+int move_file_to_public_list(char *file_id, char *cmd, char *user)
+{
+    int retn = 0;
+    redisContext *redis_conn = NULL;
+
+    redis_conn = rop_connectdb_nopwd(REDIS_SERVER_IP, REDIS_SERVER_PORT);
+    if (redis_conn == NULL) {
+        LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "redis connected error");
+        retn = -1;
+        return retn;
+    }
+
+
+    // 1 将此file id 添加到 publish list 中
+    rop_list_push(redis_conn, FILE_PUBLIC_LIST, file_id);
+
+    // 2 文件引用计数加1
+    rop_hincrement_one_field(redis_conn,FILE_REFERENCE_COUNT_HASH , file_id, 1);
+
+    // 3 文件分享值设置为 分享状态 1
+    rop_hash_set(redis_conn, FILEID_SHARED_STATUS_HASH, file_id, "1");
+    
+    rop_disconnect(redis_conn);
+
+    return 0;
 }
 
 int get_file_url_dynamic(char *file_id, char *file_url)
@@ -87,8 +114,150 @@ int get_file_url_dynamic(char *file_id, char *file_url)
     return result;
 }
 
+/* -------------------------------------------*/
+/**
+ * @brief  从redis中
+ *
+ * @param fromId
+ * @param count
+ * @param cmd
+ * @param user
+ */
+/* -------------------------------------------*/
+void print_file_list_json1(int fromId, int count, char *cmd, char *username)
+{
+    int i = 0;
 
-void print_file_list_json(int fromId, int count, char *cmd, char *kind)
+
+    cJSON *root = NULL; 
+    cJSON *array =NULL;
+    char *out;
+    char filename[FILE_NAME_LEN] = {0};
+    char create_time[FIELD_ID_SIZE] ={0};
+    char picurl[PIC_URL_LEN] = {0};
+    char suffix[8] = {0};
+    char pic_name[PIC_NAME_LEN] = {0};
+    char file_url[FILE_NAME_LEN] = {0};
+    char fileid_list[VALUES_ID_SIZE]={0};
+    char user[USER_NAME_LEN] = {0};
+    int retn = 0;
+    int endId = fromId + count - 1;
+    int score = 0;
+    char shared_status[2]= {0};
+    
+
+    RVALUES fileid_list_values = NULL;
+    int value_num;
+    redisContext *redis_conn = NULL;
+
+    redis_conn = rop_connectdb_nopwd(REDIS_SERVER_IP, REDIS_SERVER_PORT);
+    if (redis_conn == NULL) {
+        LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "redis connected error");
+        return;
+    }
+
+    LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "fromId:%d, count:%d",fromId, count);
+    fileid_list_values = malloc(count*VALUES_ID_SIZE);
+
+
+    if (strcmp(cmd, "shareFile") == 0) {
+        sprintf(fileid_list, "%s", FILE_PUBLIC_LIST);
+    }
+    else if (strcmp(cmd, "newFile") == 0) {
+        char user_id[10] = {0};
+        rop_hash_get(redis_conn, USER_USERID_HASH, username, user_id);
+        sprintf(fileid_list, "%s%s", FILE_USER_LIST, user_id);
+    }
+
+    retn = rop_range_list(redis_conn, fileid_list, fromId, endId, fileid_list_values, &value_num);
+    if (retn < 0) {
+        LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "redis range %s error", FILE_PUBLIC_LIST);
+        rop_disconnect(redis_conn);
+        return;
+    }
+
+    LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "value_num=%d\n", value_num);
+
+
+    root = cJSON_CreateObject();
+    array = cJSON_CreateArray();
+    for (i = 0;i < value_num;i ++) {
+        //array[i]:
+        cJSON* item = cJSON_CreateObject();
+
+        //id
+        cJSON_AddStringToObject(item, "id", fileid_list_values[i]);
+
+        //kind
+        cJSON_AddNumberToObject(item, "kind", 2);
+
+        //title_m(filename)
+        rop_hash_get(redis_conn, FILEID_NAME_HASH, fileid_list_values[i], filename);
+        LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "filename=%s\n", filename);
+
+        cJSON_AddStringToObject(item, "title_m", filename);
+
+        //title_s(username)
+        rop_hash_get(redis_conn, FILEID_USER_HASH, fileid_list_values[i], user);
+        cJSON_AddStringToObject(item, "title_s", user);
+
+        //time
+        rop_hash_get(redis_conn, FILEID_TIME_HASH, fileid_list_values[i], create_time);
+        cJSON_AddStringToObject(item, "descrip", create_time);
+        LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "create_time=%s\n", create_time);
+
+        //picurl_m
+        memset(picurl, 0, PIC_URL_LEN);
+        strcat(picurl, g_host_name);
+        strcat(picurl, ":");
+        strcat(picurl, g_web_server_port);
+        strcat(picurl, "/static/file_png/");
+
+
+        get_file_suffix(filename, suffix);
+        sprintf(pic_name, "%s.png", suffix);
+        strcat(picurl, pic_name);
+        cJSON_AddStringToObject(item, "picurl_m", picurl);
+
+        //url
+#if GET_URL_DYNAMIC
+        get_file_url_dynamic(fileid_list_values[i], file_url);
+#else
+        rop_hash_get(redis_conn, FILEID_URL_HASH, fileid_list_values[i], file_url);
+#endif
+        cJSON_AddStringToObject(item, "url", file_url);
+        LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "file_url=%s\n", file_url);
+
+        //pv
+        score = rop_zset_get_score(redis_conn, FILE_HOT_ZSET, fileid_list_values[i]);
+        cJSON_AddNumberToObject(item, "pv", score-1);
+
+        //hot (文件共享状态)
+        rop_hash_get(redis_conn, FILEID_SHARED_STATUS_HASH, fileid_list_values[i], shared_status);
+        cJSON_AddNumberToObject(item, "hot", atoi(shared_status));
+
+
+        cJSON_AddItemToArray(array, item);
+
+    }
+
+
+
+    cJSON_AddItemToObject(root, "games", array);
+
+    out = cJSON_Print(root);
+
+    LOG(DATA_LOG_MODULE, DATA_LOG_PROC,"%s", out);
+    printf("%s\n", out);
+
+    free(fileid_list_values);
+    free(out);
+
+    rop_disconnect(redis_conn);
+}
+
+
+void print_file_list_json(int fromId, int count, char *cmd, char *username)
 {
 
 
@@ -217,7 +386,7 @@ int main (void)
     char fromId[5];
     char count[5];
     char cmd[20];
-    char kind[10];
+    char user[USER_NAME_LEN];
     char fileId[FILE_NAME_LEN];
     
 
@@ -226,27 +395,44 @@ int main (void)
         memset(fromId, 0, 5);
         memset(count, 0, 5);
         memset(cmd, 0, 20);
-        memset(kind, 0, 10);
+        memset(user, 0, USER_NAME_LEN);
         memset(fileId, 0, FILE_NAME_LEN);
 
         query_parse_key_value(query, "cmd", cmd, NULL);
 
         if (strcmp(cmd, "newFile") == 0) {
-            //请求最新文件列表命令
+            //请求私有文件列表命令
 
             query_parse_key_value(query, "fromId", fromId, NULL);
             query_parse_key_value(query, "count", count, NULL);
-            query_parse_key_value(query, "kind", kind, NULL);
-            LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "=== fromId:%s, count:%s, cmd:%s, kind:%s", fromId, count, cmd, kind);
+            query_parse_key_value(query, "user", user, NULL);
+            LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "=== fromId:%s, count:%s, cmd:%s, user:%s", fromId, count, cmd, user);
             cgi_init();
 
             printf("Content-type: text/html\r\n");
             printf("\r\n");
 
-            print_file_list_json(atoi(fromId), atoi(count), cmd, kind);
+            //print_file_list_json(atoi(fromId), atoi(count), cmd, user);
+            print_file_list_json1(atoi(fromId), atoi(count), cmd, user);
+        }
+        else if (strcmp(cmd, "shareFile") == 0) {
+
+            //请求共享文件列表
+            query_parse_key_value(query, "fromId", fromId, NULL);
+            query_parse_key_value(query, "count", count, NULL);
+            query_parse_key_value(query, "user", user, NULL);
+            LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "=== fromId:%s, count:%s, cmd:%s, user:%s", fromId, count, cmd, user);
+            cgi_init();
+
+            printf("Content-type: text/html\r\n");
+            printf("\r\n");
+
+            //print_file_list_json(atoi(fromId), atoi(count), cmd, user);
+            print_file_list_json1(atoi(fromId), atoi(count), cmd, user);
+
         }
         else if (strcmp(cmd, "increase") == 0) {
-            //文件被点击
+            //文件被点击下载
 
             //得到点击的fileId
             query_parse_key_value(query, "fileId", fileId, NULL);
@@ -256,6 +442,21 @@ int main (void)
 
             increase_file_pv(fileId);
 
+
+            printf("Content-type: text/html\r\n");
+            printf("\r\n");
+        }
+        else if (strcmp(cmd, "shared") == 0) {
+            //文件被点击分享
+
+            //得到点击的fileId
+            query_parse_key_value(query, "fileId", fileId, NULL);
+            query_parse_key_value(query, "user", user, NULL);
+            LOG(DATA_LOG_MODULE, DATA_LOG_PROC, "=== fileId:%s,cmd:%s, user:%s", fileId,  cmd, user);
+            str_replace(fileId, "%2F", "/");
+
+
+            move_file_to_public_list(fileId, cmd, user);
 
             printf("Content-type: text/html\r\n");
             printf("\r\n");
