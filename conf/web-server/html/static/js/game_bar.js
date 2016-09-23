@@ -135,6 +135,10 @@ function addOneGameBar(id, name, url, picurl, pv, desc, hot, user) {
         var titleObj = Zepto("<span>").attr("class", "img_title_new");
         barObj.append(titleObj);
         titleObj.html("共享");
+
+        bObj.css("color", "#ffffff");
+        bObj.css("background-color", "#eeb4b4");
+        bObj.css("border-color", "#eeb4b4");
     }
 
 
@@ -182,23 +186,28 @@ function addOneGameBar(id, name, url, picurl, pv, desc, hot, user) {
     });
 
 
-    bObj.on(CLICKEVENT, function(e) {
-        shareFile(id, getCookieValue("username"))
-    });
 
-    bObj.css("background-color", "#ff6a6a");
-    bObj.css("border-color", "#ff6a6a");
+    if (hot != 1) {
+        bObj.on(CLICKEVENT, function(e) {
+            shareFile(id, getCookieValue("username"))
+        });
 
-    bObj.on(CLICKEVENT, function(e){
-        bObj.css("color", "#ffffff");
-        bObj.css("background-color", "#eeb4b4");
-        bObj.css("border-color", "#eeb4b4");
-    });
-    bObj.on('longTap', function(e){
-        bObj.css("color", "#ffffff");
-        bObj.css("background-color", "#eeb4b4");
-        bObj.css("border-color", "#eeb4b4");
-    });
+        bObj.css("background-color", "#ff6a6a");
+        bObj.css("border-color", "#ff6a6a");
+
+        bObj.on(CLICKEVENT, function(e){
+            bObj.css("color", "#ffffff");
+            bObj.css("background-color", "#eeb4b4");
+            bObj.css("border-color", "#eeb4b4");
+        });
+        bObj.on('longTap', function(e){
+            bObj.css("color", "#ffffff");
+            bObj.css("background-color", "#eeb4b4");
+            bObj.css("border-color", "#eeb4b4");
+        });
+
+    }
+
 }
 
 function createCanvasFromUrl(id, picurl, x, y) {
