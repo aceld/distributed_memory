@@ -644,7 +644,7 @@ window.onload = function() {
     bindEvent();
 
     username = getCookieValue("username");
-    password = getCookieValue("password");
+    password = getCookieValue("passwd");
 
     if (username == "") {
         alert("请先登录");
