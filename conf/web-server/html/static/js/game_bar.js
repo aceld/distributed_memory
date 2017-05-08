@@ -284,9 +284,10 @@ function pullUpAction () {
         if (menu_game_new_selected == 1) {
             loadGamesBar(alreadyLoadGameCnt,perLoadCnt,'newFile');
         } else if (menu_game_hot_selected == 1) {
-            loadGamesBar(alreadyLoadGameCnt,perLoadCnt,'hotGame');
+            loadGamesBar(alreadyLoadGameCnt,perLoadCnt,'shareFile');
         } else if (menu_kind_selected == 1 || menu_kind_selected_type != '0') {
-            loadGamesBarBykind(alreadyLoadGameCnt,perLoadCnt,'kind', menu_kind_selected_type);
+            //loadGamesBarBykind(alreadyLoadGameCnt,perLoadCnt,'kind', menu_kind_selected_type);
+            loadGamesBar(alreadyLoadGameCnt,perLoadCnt,'shareFile');
         }
 
     }, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
