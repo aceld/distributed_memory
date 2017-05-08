@@ -29,6 +29,7 @@ extern char g_storage_web_port[PORT_LEN];
  * @brief  得到上传文件所属用户的 用户名
  * @return 0 -succ 
  *         -1 fail
+ *  http://ip:port/upload/UploadAction?user=gailun
  */
 /* -------------------------------------------*/
 int get_username(char *user)
@@ -380,6 +381,7 @@ int store_file_to_redis1(char *fileid, char *fdfs_file_url, char *filename, char
 
     //将FILEID 插入到 用户私有列表中FILE_USER_LIST
     rop_hash_get(redis_conn, USER_USERID_HASH,  user, user_id);
+
     sprintf(file_user_list, "%s%s", FILE_USER_LIST, user_id);
     rop_list_push(redis_conn, file_user_list, fileid);
 
@@ -467,6 +469,10 @@ END:
 
 int store_file(char *fileid, char *fdfs_file_url, char *filename, char *user)
 {
+    //
+
+    // 存入mysql 
+
     // 存入redis中
 #if 0
     return store_file_to_redis(fileid, fdfs_file_url, filename, user);
@@ -518,6 +524,7 @@ int main ()
             }
 
             //================> 得到文件所存放storage的host_name <=================
+            //http://ip:port/group1/M00/00/00/ddsadasd.jpg
             if (make_file_url(fileid, fdfs_file_url) < 0) {
                 goto END;
             }

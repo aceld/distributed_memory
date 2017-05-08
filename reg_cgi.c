@@ -151,11 +151,13 @@ int main (void)
 
     while (FCGI_Accept() >= 0) {
 
+        //初始化配置文件
         cgi_init();
 
 
         printf("Content-type: text/html\r\n");
         printf("\r\n");
+
         deal_reg_query();
 
     }

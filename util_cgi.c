@@ -9,7 +9,7 @@
 #include "make_log.h"
 #include "config.h"
 
-char g_host_name[HOST_NAME_LEN] = "http://192.168.2.102";
+char g_host_name[HOST_NAME_LEN]         = "http://192.168.2.102";
 char g_web_server_port[PORT_LEN]        = "80";
 char g_storage_web_port[PORT_LEN]       = "80";
 

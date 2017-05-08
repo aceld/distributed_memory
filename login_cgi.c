@@ -20,6 +20,12 @@
 #define LOGIN_LOG_MODULE "cgi"
 #define LOGIN_LOG_PROC   "login"
 
+/*
+   {
+      "code": "000"
+   } 
+
+ */
 int return_login_status(char *status_num)
 {
     char *out;
@@ -67,6 +73,17 @@ int process_result(MYSQL *conn, MYSQL_RES *res_set, char *pwd)
     return -1;
 }
 
+/* -------------------------------------------*/
+/**
+ * @brief  判断用户名是否在数据中
+ *
+ * @param username
+ * @param pwd
+ *
+ * @returns   
+ *          0  success， -1 fail;
+ */
+/* -------------------------------------------*/
 int check_username(char *username, char *pwd)
 {
     char sql_cmd[SQL_MAX_LEN] = {0};
@@ -110,6 +127,7 @@ int main(int argc, char *argv[])
     char password[PWD_LEN] = {0};
     int retn = 0;
 
+
     while (FCGI_Accept() >= 0) {
 
         printf("Content-type: text/html\r\n");
@@ -141,5 +159,6 @@ int main(int argc, char *argv[])
 
     }
 
+    
 	return 0;
 }
