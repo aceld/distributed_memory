@@ -4,7 +4,7 @@
 >###email: danbing_at@163.com
 
 
-##1. 配置文件
+## 1. 配置文件
 
 ### 应用服务器配置
 
@@ -41,7 +41,7 @@ nginx中fastDFS模块配置文件
 * client  ./conf/client.conf
 
 
-##2. 生成CGI程序
+## 2. 生成CGI程序
 
 make 后会生成 
 
@@ -53,12 +53,12 @@ cgi_bin/reg       ----处理用户注册后台cgi程序
 
 cgi_bin/login     ----处理文件登陆后台cgi程序
 
-##3. 启动脚本
+## 3. 启动脚本
 
 start_up.sh
 
 
-##4. 部署脚本
+## 4. 部署脚本
 
 >web-server服务器端
 un-package-web-server.sh
