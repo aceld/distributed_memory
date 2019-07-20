@@ -1,7 +1,7 @@
 # distributed_memory
 
->###作者：刘丹冰
->###email: danbing_at@163.com
+>### 作者：刘丹冰
+>### email: danbing_at@163.com
 
 
 ## 1. 配置文件
